@@ -1,0 +1,7 @@
+name := "mars-explorer-challenge"
+
+version := "0.1"
+scalaVersion := "2.13.4"
+
+//testing libraries
+libraryDependencies += "org.scalatest"    %% "scalatest" % "3.0.8" % Test
