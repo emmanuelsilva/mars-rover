@@ -1,26 +1,32 @@
 package org.mars.challenge.universe
 
+import org.mars.challenge.rover.MarsRover
+
 sealed trait MarsPlateau {
-  def valid(point: Point): Boolean
+  def canMove(marsRover: MarsRover): Boolean
 }
 
 /**
  * A Rectangle composed by the following points:
  *
- * A -------------- B
- * |                |
- * |                |
- * |                |
- * D -------------- C
+ *  A -------------- B
+ *  |                |
+ *  |                |
+ *  |                |
+ *  D -------------- C
+ * (0,0)
  */
 case class MarsRectanglePlateau(a: Point, b: Point, c: Point, d: Point) extends MarsPlateau {
 
-  def valid(point: Point): Boolean = {
-    val insideXAxis = d.x to c.x contains point.x
-    val insideYAxis =  d.y to a.y contains point.y
-
-    insideXAxis && insideYAxis
+  def canMove(marsRover: MarsRover): Boolean = {
+    marsRover.direction match {
+      case North => marsRover.point.y < a.y
+      case South => marsRover.point.y > d.y
+      case East  => marsRover.point.x < c.x
+      case West  => marsRover.point.x > d.x
+    }
   }
+
 }
 
 object MarsPlateau {

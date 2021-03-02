@@ -13,16 +13,15 @@ class MarsExplorer(marsPlateau: MarsPlateau) {
     command match {
       case Left  => marsRover.turnLeft
       case Right => marsRover.turnRight
-      case Move  => moveIfValid(marsRover)
+      case Move  => moveOrCurrent(marsRover)
+      case Empty => marsRover
     }
   }
 
-  private def moveIfValid(marsRover: MarsRover) = {
-    val marsRoverInNextPosition = marsRover.move
-
+  private def moveOrCurrent(marsRover: MarsRover) = {
     Either.cond(
-      marsPlateau.valid(marsRoverInNextPosition.point),
-      marsRoverInNextPosition,
+      marsPlateau.canMove(marsRover),
+      marsRover.move,
       marsRover
     ).merge
   }
