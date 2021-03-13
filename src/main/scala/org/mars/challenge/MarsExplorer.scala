@@ -3,34 +3,19 @@ package org.mars.challenge
 import org.mars.challenge.rover.MarsRover
 import org.mars.challenge.universe.MarsPlateau
 
-class MarsExplorer(marsPlateau: MarsPlateau) {
-
-  def explore(marsRover: MarsRover, command: Seq[Command]): MarsRover = {
-    command.foldLeft(marsRover)(executeCommand)
-  }
-
-  private def executeCommand(marsRover: MarsRover, command: Command): MarsRover = {
-    command match {
-      case Left  => marsRover.turnLeft
-      case Right => marsRover.turnRight
-      case Move  => moveOrCurrent(marsRover)
-      case Empty => marsRover
-    }
-  }
-
-  private def moveOrCurrent(marsRover: MarsRover) = {
-    Either.cond(
-      marsPlateau.canMove(marsRover),
-      marsRover.move,
-      marsRover
-    ).merge
-  }
-}
-
 object MarsExplorer {
 
-  def apply(topX: Int, topY: Int): MarsExplorer = {
-    val marsPlateau = MarsPlateau(topX, topY)
-    new MarsExplorer(marsPlateau)
+  def explore(marsPlateau: MarsPlateau)(marsRover: MarsRover, command: Seq[Command]): MarsRover = {
+    command.foldLeft(marsRover)(executeCommand(marsPlateau))
+  }
+
+  private def executeCommand(marsPlateau: MarsPlateau)(marsRover: MarsRover, command: Command): MarsRover = {
+    command match {
+      case Left                                   => marsRover.turnLeft
+      case Right                                  => marsRover.turnRight
+      case Move if marsPlateau.canMove(marsRover) => marsRover.move
+      case Flag                                   => marsRover.plantFlag()
+      case _                                      => marsRover
+    }
   }
 }

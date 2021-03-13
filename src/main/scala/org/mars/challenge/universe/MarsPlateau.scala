@@ -26,7 +26,6 @@ case class MarsRectanglePlateau(a: Point, b: Point, c: Point, d: Point) extends 
       case West  => marsRover.point.x > d.x
     }
   }
-
 }
 
 object MarsPlateau {

@@ -2,22 +2,32 @@ package org.mars.challenge.rover
 
 import org.mars.challenge.universe._
 
-case class MarsRover(point: Point, direction: Direction) {
+case class MarsRover(point: Point, direction: Direction, flags: Seq[Point]) {
 
   def turnLeft: MarsRover = {
-    MarsRover(point, direction.toLeft)
+    copy(direction = direction.toLeft)
   }
 
   def turnRight: MarsRover = {
-    MarsRover(point, direction.toRight)
+    copy(direction = direction.toRight)
   }
 
   def move: MarsRover = {
     direction match {
-      case North => MarsRover(point.up, direction)
-      case South => MarsRover(point.down, direction)
-      case East => MarsRover(point.right, direction)
-      case West => MarsRover(point.left, direction)
+      case North => copy(point = point.up)
+      case South => copy(point = point.down)
+      case East  => copy(point = point.right)
+      case West  => copy(point = point.left)
     }
+  }
+
+  def plantFlag(): MarsRover = {
+    copy(flags = flags :+ point)
+  }
+}
+
+object MarsRover {
+  def apply(point: Point, direction: Direction): MarsRover = {
+    MarsRover(point, direction, Seq[Point]())
   }
 }
