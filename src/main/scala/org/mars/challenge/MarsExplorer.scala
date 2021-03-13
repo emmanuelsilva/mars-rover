@@ -1,7 +1,6 @@
 package org.mars.challenge
 
-import org.mars.challenge.rover.MarsRover
-import org.mars.challenge.universe.MarsPlateau
+import org.mars.challenge.domain.{Command, Flag, MarsPlateau, MarsRover, Move, Left, Right}
 
 object MarsExplorer {
 

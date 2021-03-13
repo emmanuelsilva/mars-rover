@@ -1,4 +1,4 @@
-package org.mars.challenge.universe
+package org.mars.challenge.domain
 
 case class Point(x: Int, y: Int) {
   def up: Point = Point(x, y + 1)

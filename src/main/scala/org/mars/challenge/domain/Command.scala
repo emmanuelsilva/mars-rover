@@ -1,4 +1,4 @@
-package org.mars.challenge
+package org.mars.challenge.domain
 
 sealed trait Command
 case object Empty extends Command

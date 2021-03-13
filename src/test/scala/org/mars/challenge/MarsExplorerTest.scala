@@ -1,7 +1,6 @@
 package org.mars.challenge
 
-import org.mars.challenge.rover.MarsRover
-import org.mars.challenge.universe._
+import org.mars.challenge.domain.{Command, Direction, East, Flag, MarsPlateau, MarsRover, Move, North, Point}
 import org.scalatest.Matchers.convertToAnyShouldWrapper
 import org.scalatest.WordSpecLike
 
@@ -16,7 +15,7 @@ class MarsExplorerTest extends WordSpecLike {
     )
 
     val commands = Seq[Command](
-      Move, Right, Move, Flag, Move, Left, Move
+      Move, domain.Right, Move, Flag, Move, domain.Left, Move
     )
 
     val exploredMarsRover = MarsExplorer.explore(plateau)(marsRover, commands)
@@ -62,7 +61,7 @@ class MarsExplorerTest extends WordSpecLike {
     )
 
     val commands = Seq[Command](
-      Left, Move, Left, Move, Left, Move, Left, Move, Move
+      domain.Left, Move, domain.Left, Move, domain.Left, Move, domain.Left, Move, Move
     )
 
     val exploredMarsRover = MarsExplorer.explore(plateau)(marsRover, commands)
@@ -84,7 +83,7 @@ class MarsExplorerTest extends WordSpecLike {
     )
 
     val commands = Seq[Command](
-      Move, Move, Right, Move, Move, Right, Move, Right, Right, Move
+      Move, Move, domain.Right, Move, Move, domain.Right, Move, domain.Right, domain.Right, Move
     )
 
     val exploredMarsRover = MarsExplorer.explore(plateau)(marsRover, commands)

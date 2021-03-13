@@ -1,6 +1,4 @@
-package org.mars.challenge.rover
-
-import org.mars.challenge.universe._
+package org.mars.challenge.domain
 
 case class MarsRover(point: Point, direction: Direction, flags: Seq[Point]) {
 

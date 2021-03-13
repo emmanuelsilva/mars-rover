@@ -1,6 +1,4 @@
-package org.mars.challenge.universe
-
-import org.mars.challenge.rover.MarsRover
+package org.mars.challenge.domain
 
 sealed trait MarsPlateau {
   def canMove(marsRover: MarsRover): Boolean

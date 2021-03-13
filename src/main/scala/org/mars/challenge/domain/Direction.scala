@@ -1,4 +1,4 @@
-package org.mars.challenge.universe
+package org.mars.challenge.domain
 
 sealed trait Direction {
   def toLeft: Direction
