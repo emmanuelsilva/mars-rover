@@ -23,6 +23,11 @@ case object West extends Direction {
   def toRight: Direction = North
 }
 
+case object None extends Direction {
+  def toLeft: Direction = this
+  def toRight: Direction = this
+}
+
 object Direction {
   def apply(direction: String): Direction = {
     direction match {
@@ -30,7 +35,7 @@ object Direction {
       case "S" => South
       case "E" => East
       case "W" => West
-      case _   => throw new IllegalArgumentException(s"unknown direction: $direction")
+      case _   => None
     }
   }
 }
